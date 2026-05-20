@@ -12,6 +12,12 @@ const roomParticipants = new Map();
 const primarySessions = new Map();
 
 const initializeSockets = (io) => {
+  // Clean up stale activeParticipants from previous server session
+  // (Render restarts lose in-memory state but DB retains old entries)
+  Room.updateMany({}, { $set: { activeParticipants: [], 'activeCall.isActive': false } })
+    .then(() => console.log('🧹 Cleared stale room state'))
+    .catch(err => console.error('Cleanup error:', err));
+
   // Authenticate all socket connections
   io.use(authenticateSocket);
 
