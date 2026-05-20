@@ -18,6 +18,9 @@ const { initializeSockets } = require('./sockets');
 const app = express();
 const server = http.createServer(app);
 
+// Trust Render/proxy headers (required for rate limiting behind a reverse proxy)
+app.set('trust proxy', 1);
+
 // Socket.IO setup
 const io = new Server(server, {
   cors: {
