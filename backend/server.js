@@ -24,11 +24,16 @@ app.set('trust proxy', 1);
 // Socket.IO setup
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL || 'http://localhost:3000',
-    methods: ['GET', 'POST'],
+    origin: [
+      process.env.CLIENT_URL || 'http://localhost:3000',
+      'http://localhost:3000',
+      'https://nexuscollab-production.vercel.app',
+      /\.vercel\.app$/  // allow any vercel preview URL
+    ],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true
   },
-  transports: ['polling', 'websocket'],  // polling first for Render proxy compatibility
+  transports: ['polling', 'websocket'],
   allowEIO3: true
 });
 
@@ -42,7 +47,13 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: [
+    process.env.CLIENT_URL || 'http://localhost:3000',
+    'http://localhost:3000',
+    'https://nexuscollab-production.vercel.app',
+    /\.vercel\.app$/
+  ],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
 
