@@ -30,9 +30,10 @@ const getDashboard = async (req, res) => {
       .populate('createdBy', 'username')
       .lean();
 
-    // Online users with their current room (if any)
-    const onlineUserList = await User.find({ isOnline: true, isActive: true })
-      .select('username role lastSeen')
+    // All active users with online status — show everyone, not just online
+    const onlineUserList = await User.find({ isActive: true })
+      .select('username role lastSeen isOnline')
+      .sort({ isOnline: -1, username: 1 })
       .lean();
 
     // Build a map: userId -> roomName for users currently in a room

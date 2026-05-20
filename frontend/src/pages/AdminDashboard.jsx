@@ -221,22 +221,29 @@ const AdminDashboard = () => {
 
               {/* Active Sessions */}
               <div className={styles.card}>
-                <h2 className={styles.cardTitle}>🟢 Active Sessions</h2>
+                <h2 className={styles.cardTitle}>👥 All Sessions</h2>
                 {!data.onlineSessions || data.onlineSessions.length === 0 ? (
-                  <p className={styles.empty}>No users online</p>
+                  <p className={styles.empty}>No users found</p>
                 ) : (
                   <div className={styles.sessionList}>
                     {data.onlineSessions.map((s) => (
                       <div key={s._id} className={styles.sessionRow}>
-                        <div className={styles.sessionAvatar}>{s.username[0].toUpperCase()}</div>
+                        <div className={styles.sessionAvatar}
+                          style={{ background: s.isOnline ? 'linear-gradient(135deg,#6366f1,#8b5cf6)' : '#1e2330' }}>
+                          {s.username[0].toUpperCase()}
+                        </div>
                         <div className={styles.sessionInfo}>
                           <span className={styles.sessionName}>{s.username}</span>
                           <span className={styles.sessionRole} style={{ color: ROLE_COLORS[s.role] }}>{s.role}</span>
                         </div>
                         <div className={styles.sessionMeta}>
-                          {s.currentRoom
-                            ? <span className={styles.inRoomBadge}>📍 {s.currentRoom}</span>
-                            : <span className={styles.idleBadge}>idle</span>}
+                          {s.isOnline ? (
+                            s.currentRoom
+                              ? <span className={styles.inRoomBadge}>📍 {s.currentRoom}</span>
+                              : <span className={styles.inRoomBadge} style={{ background: 'rgba(34,197,94,0.1)', color: '#4ade80' }}>● online</span>
+                          ) : (
+                            <span className={styles.idleBadge}>○ offline</span>
+                          )}
                           <span className={styles.sessionTime}>{timeAgo(s.lastSeen)}</span>
                         </div>
                       </div>
