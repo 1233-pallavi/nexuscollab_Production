@@ -1,0 +1,155 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #0d0f14;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1.25rem 0.75rem;
+  border-bottom: 1px solid #1e2330;
+}
+
+.header h3 {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.count {
+  background: #1e2440;
+  color: #6366f1;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.empty {
+  text-align: center;
+  color: #374151;
+  font-size: 0.875rem;
+  padding: 2rem;
+}
+
+.participant {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.participant:hover { background: #111318; }
+
+.avatar {
+  position: relative;
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* Online/offline dot on avatar */
+.statusDot {
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 2px solid #0d0f14;
+}
+.statusDot.online  { background: #22c55e; }
+.statusDot.offline { background: #475569; }
+
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.you {
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
+.role {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Online/offline text badge */
+.onlineBadge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.onlineBadgeActive {
+  color: #22c55e;
+  background: rgba(34,197,94,0.1);
+}
+.onlineBadgeOff {
+  color: #475569;
+  background: rgba(71,85,105,0.1);
+}
+
+.actions {
+  display: flex;
+  gap: 0.25rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.participant:hover .actions { opacity: 1; }
+
+.actionBtn {
+  background: #1a1f2e;
+  border: 1px solid #252a37;
+  border-radius: 6px;
+  padding: 4px 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.actionBtn:hover { background: #252a37; }
+
+.kickBtn:hover {
+  background: rgba(239,68,68,0.15);
+  border-color: rgba(239,68,68,0.3);
+}

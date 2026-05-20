@@ -1,0 +1,380 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: #0d0f14;
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, sans-serif;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.5rem;
+  background: #111318;
+  border-bottom: 1px solid #1e2330;
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.backBtn {
+  background: #1a1f2e;
+  border: 1px solid #252a37;
+  color: #94a3b8;
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.backBtn:hover { background: #252a37; }
+
+.roomName {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: #e2e8f0;
+}
+
+.roomDesc {
+  font-size: 0.75rem;
+  color: #475569;
+  margin: 0;
+}
+
+.roomOwner {
+  font-size: 0.7rem;
+  color: #374151;
+  margin: 1px 0 0;
+}
+
+.lockedBadge {
+  font-size: 0.72rem;
+  background: rgba(239,68,68,0.1);
+  color: #f87171;
+  border-radius: 4px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.iconBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.4rem;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.iconBtn:hover { background: #1a1f2e; }
+
+.tabs {
+  display: flex;
+  background: #0d0f14;
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid #1e2330;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.tab:hover { color: #94a3b8; }
+
+.activeTab {
+  background: #1e2440;
+  color: #e2e8f0;
+}
+
+.liveDot {
+  width: 7px; height: 7px;
+  background: #ef4444;
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.notification {
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #a5b4fc;
+  text-align: center;
+  padding: 0.5rem;
+  font-size: 0.82rem;
+  flex-shrink: 0;
+}
+
+.callError {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.3);
+  color: #f87171;
+  padding: 0.75rem;
+  margin: 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+}
+
+.content {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.panel {
+  display: none;
+  height: 100%;
+}
+
+.panel.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Manage Participants Panel */
+.managePanel {
+  padding: 1.5rem;
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.manageTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.manageSubtitle {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  color: #475569;
+}
+
+.userList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.manageEmpty {
+  color: #475569;
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.userRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.875rem;
+  background: #111318;
+  border: 1px solid #1e2330;
+  border-radius: 10px;
+  transition: border-color 0.15s;
+}
+.userRow:hover { border-color: #252a37; }
+
+.userRowAvatar {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.userRowInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.userRowName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.userRowRole {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.addedBadge {
+  font-size: 0.72rem;
+  color: #22c55e;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: rgba(34,197,94,0.1);
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.addBtn {
+  background: rgba(99,102,241,0.15);
+  border: 1px solid rgba(99,102,241,0.3);
+  color: #818cf8;
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.addBtn:hover:not(:disabled) { background: rgba(99,102,241,0.25); }
+.addBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.removeBtn {
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.25);
+  color: #f87171;
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+  white-space: nowrap;
+}
+.removeBtn:hover:not(:disabled) { background: rgba(239,68,68,0.2); }
+.removeBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Manage Panel Sections ───────────────────────────────────────────────── */
+.settingsSection {
+  margin-bottom: 1.75rem;
+}
+
+.participantsSection {
+  flex: 1;
+}
+
+/* Settings toggle rows */
+.settingsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.settingRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  background: #111318;
+  border: 1px solid #1e2330;
+  border-radius: 10px;
+  transition: border-color 0.15s;
+}
+.settingRow:hover { border-color: #252a37; }
+
+.settingInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.settingLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.settingDesc {
+  font-size: 0.75rem;
+  color: #475569;
+  line-height: 1.4;
+}
+
+/* Toggle button */
+.toggleBtn {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 20px;
+  padding: 0.35rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  min-width: 80px;
+  text-align: center;
+}
+
+.toggleOn {
+  background: rgba(34,197,94,0.15);
+  color: #22c55e;
+  border: 1px solid rgba(34,197,94,0.3);
+}
+.toggleOn:hover { background: rgba(34,197,94,0.25); }
+
+.toggleOff {
+  background: rgba(100,116,139,0.15);
+  color: #64748b;
+  border: 1px solid rgba(100,116,139,0.2);
+}
+.toggleOff:hover { background: rgba(100,116,139,0.25); }
+
+.toggleBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── Mobile Responsive ───────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header { flex-direction: column; align-items: flex-start; gap: 0.5rem; padding: 0.75rem 1rem; }
+  .headerLeft { width: 100%; }
+  .headerActions { width: 100%; justify-content: space-between; }
+
+  .tabs { overflow-x: auto; width: 100%; }
+  .tab { padding: 0.4rem 0.6rem; font-size: 0.75rem; }
+
+  .roomName { font-size: 0.9rem; }
+  .roomDesc, .roomOwner { display: none; }
+}

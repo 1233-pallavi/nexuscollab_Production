@@ -1,0 +1,477 @@
+.layout {
+  display: flex;
+  height: 100vh;
+  background: #0d0f14;
+  color: #e2e8f0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────────────────────── */
+.sidebar {
+  width: 220px;
+  background: #111318;
+  border-right: 1px solid #1e2330;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  flex-shrink: 0;
+}
+
+.logo { font-size: 1.1rem; font-weight: 700; padding-bottom: 1.5rem; color: #e2e8f0; }
+
+.nav { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.875rem;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background 0.15s, color 0.15s;
+}
+.navItem:hover { background: #1a1f2e; color: #94a3b8; }
+.navItem.active { background: #1e2440; color: #e2e8f0; }
+
+.sidebarFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid #1e2330;
+}
+
+.footerUser { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.footerUsername {
+  font-size: 0.875rem; font-weight: 600; color: #e2e8f0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.footerRole { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.logoutBtn { background: none; border: none; color: #475569; cursor: pointer; font-size: 1rem; }
+.logoutBtn:hover { color: #ef4444; }
+
+/* ── Main ────────────────────────────────────────────────────────────────── */
+.main { flex: 1; overflow-y: auto; }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #1e2330;
+  background: #111318;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.header h1 { margin: 0; font-size: 1.2rem; }
+
+.syncBtn {
+  background: #1e2440;
+  border: 1px solid #252a37;
+  color: #94a3b8;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.15s;
+}
+.syncBtn:hover:not(:disabled) { background: #252a37; }
+.syncBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.syncMsg { font-size: 0.8rem; color: #22c55e; }
+.refreshNote { font-size: 0.72rem; color: #374151; }
+
+.loading, .error {
+  display: flex; align-items: center; justify-content: center;
+  padding: 4rem; color: #475569;
+}
+.error { color: #f87171; }
+
+/* ── Stats ───────────────────────────────────────────────────────────────── */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+}
+
+.statCard {
+  background: #161923;
+  border: 1px solid #1e2330;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-left: 3px solid var(--accent);
+}
+.statIcon { font-size: 1.5rem; }
+.statValue { font-size: 1.75rem; font-weight: 700; color: #e2e8f0; line-height: 1; }
+.statLabel { font-size: 0.75rem; color: #64748b; margin-top: 2px; }
+
+/* ── Three-column grid ───────────────────────────────────────────────────── */
+.columns3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 0 2rem 2rem;
+}
+
+@media (max-width: 1100px) { .columns3 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px)  { .columns3 { grid-template-columns: 1fr; } }
+
+/* ── Card ────────────────────────────────────────────────────────────────── */
+.card {
+  background: #161923;
+  border: 1px solid #1e2330;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.cardTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.875rem 1.25rem;
+  margin: 0;
+  border-bottom: 1px solid #1e2330;
+  flex-shrink: 0;
+}
+
+.empty { padding: 1.5rem; text-align: center; color: #374151; font-size: 0.875rem; }
+
+/* ── Active Sessions ─────────────────────────────────────────────────────── */
+.sessionList { overflow-y: auto; max-height: 360px; }
+
+.sessionRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.25rem;
+  border-bottom: 1px solid #1a1f2e;
+  transition: background 0.15s;
+}
+.sessionRow:last-child { border-bottom: none; }
+.sessionRow:hover { background: #111318; }
+
+.sessionAvatar {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: white;
+  flex-shrink: 0;
+}
+
+.sessionInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.sessionName { font-size: 0.82rem; font-weight: 600; color: #e2e8f0; }
+.sessionRole { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+
+.sessionMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.inRoomBadge {
+  font-size: 0.65rem;
+  background: rgba(99,102,241,0.15);
+  color: #818cf8;
+  border-radius: 4px;
+  padding: 1px 6px;
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.idleBadge {
+  font-size: 0.65rem;
+  color: #374151;
+  background: rgba(71,85,105,0.1);
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+.sessionTime { font-size: 0.62rem; color: #374151; }
+
+/* ── Active Rooms ────────────────────────────────────────────────────────── */
+.roomList { overflow-y: auto; max-height: 360px; }
+
+.roomItem { border-bottom: 1px solid #1a1f2e; }
+.roomItem:last-child { border-bottom: none; }
+
+.roomItemHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  transition: background 0.15s;
+}
+.roomItemHeader:hover { background: #111318; }
+.roomItemHeader strong { font-size: 0.875rem; color: #e2e8f0; display: block; }
+
+.roomMeta { font-size: 0.72rem; color: #475569; }
+.callBadge {
+  font-size: 0.68rem;
+  background: rgba(239,68,68,0.1);
+  color: #f87171;
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+.expandIcon { font-size: 0.65rem; color: #475569; }
+
+.roomParticipants {
+  padding: 0.5rem 1.25rem 0.75rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  background: #111318;
+}
+.apRow { display: flex; align-items: center; gap: 0.5rem; }
+.apDot { font-size: 0.5rem; color: #22c55e; }
+.apName { font-size: 0.8rem; color: #94a3b8; flex: 1; }
+.apRole { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ── Activity Log ────────────────────────────────────────────────────────── */
+.activityList { overflow-y: auto; max-height: 360px; }
+
+.activityItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.6rem 1.25rem;
+  border-bottom: 1px solid #1a1f2e;
+}
+.activityItem:last-child { border-bottom: none; }
+
+.activityIcon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+.activityContent {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column; gap: 1px;
+}
+.activityUser { font-size: 0.8rem; font-weight: 600; color: #e2e8f0; }
+.activityType { font-size: 0.72rem; color: #64748b; text-transform: capitalize; }
+.activityRoom { font-size: 0.7rem; color: #475569; }
+.activityDetails { font-size: 0.7rem; color: #374151; font-style: italic; }
+.activityTime { font-size: 0.65rem; color: #374151; white-space: nowrap; flex-shrink: 0; }
+
+/* ── Room Management Section ─────────────────────────────────────────────── */
+.section {
+  margin: 0 2rem 1.5rem;
+  background: #161923;
+  border: 1px solid #1e2330;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid #1e2330;
+}
+
+.sectionTitle {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+.newRoomBtn {
+  background: #6366f1;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  padding: 0.4rem 0.875rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.newRoomBtn:hover { background: #4f46e5; }
+
+.tableEmpty {
+  padding: 1.5rem;
+  text-align: center;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.tableWrap { overflow-x: auto; }
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th {
+  text-align: left;
+  padding: 0.6rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #1e2330;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #111318;
+  color: #94a3b8;
+  vertical-align: middle;
+}
+
+.table tr:last-child td { border-bottom: none; }
+.table tr:hover td { background: #111318; }
+
+/* Room name cell */
+.roomCell {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.roomCellIcon {
+  width: 28px; height: 28px;
+  background: #1e2440;
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  color: #6366f1;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.roomCellName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  display: block;
+}
+
+.roomCellDesc {
+  font-size: 0.72rem;
+  color: #475569;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+}
+
+.ownerCell { font-size: 0.82rem; color: #94a3b8; }
+.memberCell { font-size: 0.82rem; color: #94a3b8; text-align: center; }
+.dateCell   { font-size: 0.78rem; color: #475569; white-space: nowrap; }
+
+.flagsCell { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+
+.flagBadge {
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.tableDeleteBtn {
+  background: transparent;
+  border: 1px solid rgba(239,68,68,0.25);
+  color: #f87171;
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tableDeleteBtn:hover {
+  background: rgba(239,68,68,0.12);
+  border-color: rgba(239,68,68,0.4);
+}
+
+/* ── Delete Confirm Modal ────────────────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  background: #161923;
+  border: 1px solid #252a37;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+}
+
+.confirmIcon { font-size: 2.5rem; text-align: center; margin-bottom: 0.75rem; }
+.confirmTitle { margin: 0 0 0.75rem; font-size: 1.1rem; color: #e2e8f0; text-align: center; }
+.confirmMsg {
+  font-size: 0.875rem;
+  color: #94a3b8;
+  text-align: center;
+  line-height: 1.6;
+  margin: 0 0 1.5rem;
+}
+
+.modalActions { display: flex; gap: 0.75rem; justify-content: flex-end; }
+
+.cancelBtn {
+  background: transparent;
+  border: 1px solid #252a37;
+  color: #94a3b8;
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background 0.15s;
+}
+.cancelBtn:hover { background: #1a1f2e; }
+.cancelBtn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.dangerBtn {
+  background: #ef4444;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  padding: 0.6rem 1.25rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.dangerBtn:hover:not(:disabled) { background: #dc2626; }
+.dangerBtn:disabled { opacity: 0.6; cursor: not-allowed; }
