@@ -266,6 +266,10 @@ const initializeSockets = (io) => {
     socket.on('mute-user', async ({ targetUserId, roomId }) => {
       if (!['admin', 'moderator'].includes(user.role)) return;
 
+      // Nobody can mute an admin
+      const targetUser = await User.findById(targetUserId).select('role');
+      if (targetUser?.role === 'admin') return;
+
       const targetSockets = activeSessions.get(targetUserId);
       if (targetSockets) {
         targetSockets.forEach(sid => {
