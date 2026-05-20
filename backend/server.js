@@ -28,7 +28,8 @@ const io = new Server(server, {
     methods: ['GET', 'POST'],
     credentials: true
   },
-  transports: ['websocket', 'polling']
+  transports: ['polling', 'websocket'],  // polling first for Render proxy compatibility
+  allowEIO3: true
 });
 
 // Connect to MongoDB, then seed default admin if needed
