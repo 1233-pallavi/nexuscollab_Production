@@ -28,13 +28,17 @@ const io = new Server(server, {
       process.env.CLIENT_URL || 'http://localhost:3000',
       'http://localhost:3000',
       'https://nexuscollab-production.vercel.app',
-      /\.vercel\.app$/  // allow any vercel preview URL
+      /\.vercel\.app$/
     ],
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true
   },
+  // Allow both transports — client decides based on environment
   transports: ['polling', 'websocket'],
-  allowEIO3: true
+  allowEIO3: true,
+  // Increase timeouts for Render's cold starts
+  pingTimeout: 60000,
+  pingInterval: 25000
 });
 
 // Connect to MongoDB, then seed default admin if needed

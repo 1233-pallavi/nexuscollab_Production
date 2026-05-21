@@ -16,7 +16,9 @@ export const connectSocket = (token) => {
 
   socket = io(SOCKET_URL, {
     auth: { token },
-    transports: ['polling', 'websocket'],  // polling first — required behind Render proxy
+    // Use polling only on production — Render free tier doesn't reliably support
+    // WebSocket upgrades. Polling works through any proxy/CDN.
+    transports: SOCKET_URL.includes('localhost') ? ['websocket', 'polling'] : ['polling'],
     reconnection: true,
     reconnectionAttempts: 10,
     reconnectionDelay: 1000,
